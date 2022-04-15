@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Upload Files</h1>
+<div class="row">
+    <section>
+        <form method="post" enctype="multipart/form-data"
+              asp-controller="FileUpload" asp-action="Index">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="files" multiple />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </section>
+    @if (ViewBag.Message != null)
+                        {
+                            <div class="col-sm-9">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Uploaded File</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in (@ViewBag.Message as string).Split(','))
+                                        {
+                                            if (!string.IsNullOrEmpty(item))
+                                            {
+                                                <tr>
+                                                    <td>@item</td>
+                                                    
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+</div>
